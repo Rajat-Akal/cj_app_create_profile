@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -29,6 +30,7 @@ class _CreateProfileState extends State<CreateProfile> {
   ];
 
   var years = [
+    '0 year',
     '1 year',
     '2 year',
     '3 year',
@@ -40,10 +42,10 @@ class _CreateProfileState extends State<CreateProfile> {
     '9 year',
     '10 year',
     '11 year',
-    '12 year',
   ];
 
   var months = [
+    '0 month',
     '1 month',
     '2 month',
     '3 month',
@@ -142,7 +144,9 @@ class _CreateProfileState extends State<CreateProfile> {
                 decoration: InputDecoration(
                     hintText: "Enter your Full Name",
                     hintStyle: TextStyle(
-                        color: Projectconst.hinttextcolor, fontSize: 16.0),
+                      color: Projectconst.hinttextcolor,
+                      fontSize: 16.0,
+                    ),
                     prefixIcon:
                         ImageIcon(AssetImage("assets/icons/User icon.png")),
                     border: OutlineInputBorder(
@@ -165,33 +169,47 @@ class _CreateProfileState extends State<CreateProfile> {
               SizedBox(
                 height: 8,
               ),
-              DropdownButtonFormField(
-                hint: Text(
-                  "Choose Job Role",
-                  style: TextStyle(
-                    color: Projectconst.hinttextcolor,
-                    fontSize: 16.0,
-                  ),
-                ),
-                items: items1.map((String items) {
-                  return DropdownMenuItem(child: Text(items), value: items);
-                }).toList(),
-                onChanged: (context) {},
+              DropdownButtonFormField2(
+                onChanged: (value) {},
+                items: items1
+                    .map((item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(
+                            item,
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ))
+                    .toList(),
                 decoration: InputDecoration(
-                  prefixIcon:
-                      ImageIcon(AssetImage("assets/icons/account icon.png")),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
-                      color: Projectconst.inputbordercolor,
-                    ),
+                    prefixIcon:
+                        ImageIcon(AssetImage("assets/icons/department.png")),
+                    isDense: true,
+                    contentPadding: EdgeInsets.only(right: 10),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                        color: Projectconst.inputbordercolor,
+                      ),
+                    )),
+                isExpanded: true,
+                hint: Text(
+                  'Choose Job Role',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Projectconst.hinttextcolor,
                   ),
                 ),
+                iconSize: 30,
+                buttonHeight: 62,
+                dropdownMaxHeight: 200,
+                offset: Offset(-40, 0),
               ),
               SizedBox(
                 height: 15,
               ),
-              DropdownButtonFormField(
+              DropdownButtonFormField2(
                 hint: Text(
                   "Choose Sub Role",
                   style: TextStyle(
@@ -202,16 +220,23 @@ class _CreateProfileState extends State<CreateProfile> {
                 items: items2.map((String items) {
                   return DropdownMenuItem(child: Text(items), value: items);
                 }).toList(),
-                onChanged: (context) {},
+                onChanged: (value) {},
                 decoration: InputDecoration(
                     prefixIcon:
                         ImageIcon(AssetImage("assets/icons/department.png")),
+                    isDense: true,
+                    contentPadding: EdgeInsets.only(right: 10),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
                       borderSide: BorderSide(
                         color: Projectconst.inputbordercolor,
                       ),
                     )),
+                isExpanded: true,
+                iconSize: 30,
+                buttonHeight: 62,
+                dropdownMaxHeight: 200,
+                offset: Offset(-40, 0),
               ),
               SizedBox(
                 height: 25,
@@ -229,7 +254,7 @@ class _CreateProfileState extends State<CreateProfile> {
               Row(
                 children: [
                   Expanded(
-                    child: DropdownButtonFormField(
+                    child: DropdownButtonFormField2(
                       hint: Text(
                         "Years",
                         style: TextStyle(
@@ -243,6 +268,8 @@ class _CreateProfileState extends State<CreateProfile> {
                       }).toList(),
                       onChanged: (context) {},
                       decoration: InputDecoration(
+                          isDense: true,
+                          contentPadding: EdgeInsets.only(right: 10),
                           prefixIcon: ImageIcon(
                             AssetImage("assets/icons/calendar.png"),
                           ),
@@ -252,13 +279,18 @@ class _CreateProfileState extends State<CreateProfile> {
                               color: Projectconst.inputbordercolor,
                             ),
                           )),
+                      isExpanded: true,
+                      iconSize: 30,
+                      buttonHeight: 62,
+                      dropdownMaxHeight: 200,
+                      offset: Offset(-40, 0),
                     ),
                   ),
                   SizedBox(
                     width: 15,
                   ),
                   Expanded(
-                    child: DropdownButtonFormField(
+                    child: DropdownButtonFormField2(
                       hint: Text(
                         "Months",
                         style: TextStyle(
@@ -272,6 +304,8 @@ class _CreateProfileState extends State<CreateProfile> {
                       }).toList(),
                       onChanged: (context) {},
                       decoration: InputDecoration(
+                          isDense: true,
+                          contentPadding: EdgeInsets.only(right: 10),
                           prefixIcon: ImageIcon(
                               AssetImage("assets/icons/calendar.png")),
                           border: OutlineInputBorder(
@@ -280,6 +314,11 @@ class _CreateProfileState extends State<CreateProfile> {
                               color: Projectconst.inputbordercolor,
                             ),
                           )),
+                      isExpanded: true,
+                      iconSize: 30,
+                      buttonHeight: 62,
+                      dropdownMaxHeight: 200,
+                      offset: Offset(-40, 0),
                     ),
                   ),
                 ],
@@ -297,7 +336,7 @@ class _CreateProfileState extends State<CreateProfile> {
               SizedBox(
                 height: 8,
               ),
-              DropdownButtonFormField(
+              DropdownButtonFormField2(
                 hint: Text(
                   "Select Your Monthly Income",
                   style: TextStyle(
@@ -310,6 +349,8 @@ class _CreateProfileState extends State<CreateProfile> {
                 }).toList(),
                 onChanged: (context) {},
                 decoration: InputDecoration(
+                  isDense: true,
+                  contentPadding: EdgeInsets.only(right: 10),
                   prefixIcon: ImageIcon(AssetImage("assets/icons/rupee.png")),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
@@ -318,6 +359,11 @@ class _CreateProfileState extends State<CreateProfile> {
                     ),
                   ),
                 ),
+                dropdownMaxHeight: 90,
+                isExpanded: true,
+                iconSize: 30,
+                buttonHeight: 62,
+                offset: Offset(-40, 0),
               ),
               SizedBox(
                 height: 20,
