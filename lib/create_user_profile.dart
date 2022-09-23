@@ -67,6 +67,15 @@ class _CreateProfileState extends State<CreateProfile> {
     "100000 - 120000",
   ];
 
+  final _formKey = GlobalKey<FormState>();
+
+  String? isValid(value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter some text';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,239 +118,294 @@ class _CreateProfileState extends State<CreateProfile> {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                child: Text(
-                  "Tell Us About Yourself!",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: Projectconst.headingfontSize,
-                    color: Colors.blue,
-                    fontFamily: Projectconst.fontfamily,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: Text(
+                    "Tell Us About Yourself!",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: Projectconst.headingfontSize,
+                      color: Colors.blue,
+                      fontFamily: Projectconst.fontfamily,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 35,
-              ),
-              Text(
-                "  What is your Name?",
-                style: TextStyle(
+                SizedBox(
+                  height: 35,
+                ),
+                Text(
+                  "  What is your name?",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: Projectconst.textfieldlabelfontSize),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      hintText: "Enter your Full Name",
+                      hintStyle: TextStyle(
+                          color: Projectconst.hinttextcolor, fontSize: 16.0),
+                      prefixIcon:
+                          ImageIcon(AssetImage("assets/icons/User icon.png")),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Projectconst.inputbordercolor,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      )),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Text(
+                  "  Select your job",
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: Projectconst.textfieldlabelfontSize),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              TextField(
-                decoration: InputDecoration(
-                    hintText: "Enter your Full Name",
-                    hintStyle: TextStyle(
-                        color: Projectconst.hinttextcolor, fontSize: 16.0),
+                    fontSize: Projectconst.textfieldlabelfontSize,
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                DropdownButtonFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select any value';
+                    }
+                    return null;
+                  },
+                  isExpanded: true,
+                  menuMaxHeight: 200,
+                  hint: Text(
+                    "Choose Job Role",
+                    style: TextStyle(
+                      color: Projectconst.hinttextcolor,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  items: items1.map((String items) {
+                    return DropdownMenuItem(child: Text(items), value: items);
+                  }).toList(),
+                  onChanged: (context) {},
+                  decoration: InputDecoration(
                     prefixIcon:
-                        ImageIcon(AssetImage("assets/icons/User icon.png")),
+                        ImageIcon(AssetImage("assets/icons/account icon.png")),
                     border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
                       borderSide: BorderSide(
                         color: Projectconst.inputbordercolor,
                       ),
-                      borderRadius: BorderRadius.circular(15.0),
-                    )),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              Text(
-                "  Select Your Job",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: Projectconst.textfieldlabelfontSize,
-                ),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              DropdownButtonFormField(
-                hint: Text(
-                  "Choose Job Role",
-                  style: TextStyle(
-                    color: Projectconst.hinttextcolor,
-                    fontSize: 16.0,
-                  ),
-                ),
-                items: items1.map((String items) {
-                  return DropdownMenuItem(child: Text(items), value: items);
-                }).toList(),
-                onChanged: (context) {},
-                decoration: InputDecoration(
-                  prefixIcon:
-                      ImageIcon(AssetImage("assets/icons/account icon.png")),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
-                      color: Projectconst.inputbordercolor,
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              DropdownButtonFormField(
-                hint: Text(
-                  "Choose Sub Role",
+                SizedBox(
+                  height: 15,
+                ),
+                DropdownButtonFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select any value';
+                    }
+                    return null;
+                  },
+                  isExpanded: true,
+                  menuMaxHeight: 200,
+                  hint: Text(
+                    "Choose Sub Role",
+                    style: TextStyle(
+                      color: Projectconst.hinttextcolor,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  items: items2.map((String items) {
+                    return DropdownMenuItem(child: Text(items), value: items);
+                  }).toList(),
+                  onChanged: (context) {},
+                  decoration: InputDecoration(
+                      prefixIcon:
+                          ImageIcon(AssetImage("assets/icons/department.png")),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide(
+                          color: Projectconst.inputbordercolor,
+                        ),
+                      )),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Text(
+                  "  How much experience do you have ?",
                   style: TextStyle(
-                    color: Projectconst.hinttextcolor,
-                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    fontSize: Projectconst.textfieldlabelfontSize,
                   ),
                 ),
-                items: items2.map((String items) {
-                  return DropdownMenuItem(child: Text(items), value: items);
-                }).toList(),
-                onChanged: (context) {},
-                decoration: InputDecoration(
-                    prefixIcon:
-                        ImageIcon(AssetImage("assets/icons/department.png")),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(
-                        color: Projectconst.inputbordercolor,
-                      ),
-                    )),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              Text(
-                "  How Many Years of Experience You Have ?",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: Projectconst.textfieldlabelfontSize,
+                SizedBox(
+                  height: 8,
                 ),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: DropdownButtonFormField(
-                      hint: Text(
-                        "Years",
-                        style: TextStyle(
-                          color: Projectconst.hinttextcolor,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                      items: years.map((String items) {
-                        return DropdownMenuItem(
-                            child: Text(items), value: items);
-                      }).toList(),
-                      onChanged: (context) {},
-                      decoration: InputDecoration(
-                          prefixIcon: ImageIcon(
-                            AssetImage("assets/icons/calendar.png"),
+                Row(
+                  children: [
+                    Expanded(
+                      child: DropdownButtonFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please select any value';
+                          }
+                          return null;
+                        },
+                        isExpanded: true,
+                        menuMaxHeight: 200,
+                        hint: Text(
+                          "Years",
+                          style: TextStyle(
+                            color: Projectconst.hinttextcolor,
+                            fontSize: 16.0,
                           ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: BorderSide(
-                              color: Projectconst.inputbordercolor,
-                            ),
-                          )),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: DropdownButtonFormField(
-                      hint: Text(
-                        "Months",
-                        style: TextStyle(
-                          color: Projectconst.hinttextcolor,
-                          fontSize: 16.0,
                         ),
+                        items: years.map((String items) {
+                          return DropdownMenuItem(
+                              child: Text(items), value: items);
+                        }).toList(),
+                        onChanged: (context) {},
+                        decoration: InputDecoration(
+                            prefixIcon: ImageIcon(
+                              AssetImage("assets/icons/calendar.png"),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                              borderSide: BorderSide(
+                                color: Projectconst.inputbordercolor,
+                              ),
+                            )),
                       ),
-                      items: months.map((String items) {
-                        return DropdownMenuItem(
-                            child: Text(items), value: items);
-                      }).toList(),
-                      onChanged: (context) {},
-                      decoration: InputDecoration(
-                          prefixIcon: ImageIcon(
-                              AssetImage("assets/icons/calendar.png")),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: BorderSide(
-                              color: Projectconst.inputbordercolor,
-                            ),
-                          )),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              Text(
-                "  What is Your Monthly Income ?",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: Projectconst.textfieldlabelfontSize,
-                ),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              DropdownButtonFormField(
-                hint: Text(
-                  "Select Your Monthly Income",
-                  style: TextStyle(
-                    color: Projectconst.hinttextcolor,
-                    fontSize: 16.0,
-                  ),
-                ),
-                items: salary.map((String items) {
-                  return DropdownMenuItem(child: Text(items), value: items);
-                }).toList(),
-                onChanged: (context) {},
-                decoration: InputDecoration(
-                  prefixIcon: ImageIcon(AssetImage("assets/icons/rupee.png")),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
-                      color: Projectconst.inputbordercolor,
+                    SizedBox(
+                      width: 15,
                     ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                child: SizedBox(
-                  height: 55,
-                  width: 260,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff33b8fd),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(17),
-                        ) // NEW
+                    Expanded(
+                      child: DropdownButtonFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please select any value';
+                          }
+                          return null;
+                        },
+                        isExpanded: true,
+                        menuMaxHeight: 200,
+                        hint: Text(
+                          "Months",
+                          style: TextStyle(
+                            color: Projectconst.hinttextcolor,
+                            fontSize: 16.0,
+                          ),
                         ),
-                    onPressed: () {},
-                    child: Text(
-                      "Continue",
-                      style: TextStyle(fontSize: 18.0),
+                        items: months.map((String items) {
+                          return DropdownMenuItem(
+                              child: Text(items), value: items);
+                        }).toList(),
+                        onChanged: (context) {},
+                        decoration: InputDecoration(
+                            prefixIcon: ImageIcon(
+                                AssetImage("assets/icons/calendar.png")),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                              borderSide: BorderSide(
+                                color: Projectconst.inputbordercolor,
+                              ),
+                            )),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Text(
+                  "  What is your monthly income?",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: Projectconst.textfieldlabelfontSize,
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                DropdownButtonFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select any value';
+                    }
+                    return null;
+                  },
+                  isExpanded: true,
+                  menuMaxHeight: 200,
+                  hint: Text(
+                    "Select Your Monthly Income",
+                    style: TextStyle(
+                      color: Projectconst.hinttextcolor,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  items: salary.map((String items) {
+                    return DropdownMenuItem(child: Text(items), value: items);
+                  }).toList(),
+                  onChanged: (context) {},
+                  decoration: InputDecoration(
+                    prefixIcon: ImageIcon(AssetImage("assets/icons/rupee.png")),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      borderSide: BorderSide(
+                        color: Projectconst.inputbordercolor,
+                      ),
                     ),
                   ),
                 ),
-              )
-            ],
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: SizedBox(
+                    height: 55,
+                    width: 260,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xff33b8fd),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(17),
+                          ) // NEW
+                          ),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Processing Data")),
+                          );
+                        }
+                      },
+                      child: Text(
+                        "Continue",
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
